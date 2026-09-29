@@ -353,4 +353,10 @@ The first prompt built the audit trail, which was only verified offline against 
 
 ### Why a Second Prompt Was Needed
 
-Not applicable.
+The first prompt created and pushed the repository. The second prompt asked for confirmation that the repository is public, since graders must be able to open and clone it without access.
+
+### Additional Prompts
+
+2. To confirm that this is a public repo?
+
+   Timestamp: 2026-09-28 23:22:54 EDT
