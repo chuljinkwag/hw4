@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App check · Campus Customs · Homework 4</title>
+    <style>
+      :root {
+        --navy: #00356b;
+        --navy-deep: #00224a;
+        --warm-white: #faf7f1;
+        --paper: #f4eee2;
+        --ink: #1b2231;
+        --muted: #5a6273;
+        --rule: #ddd5c6;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--warm-white);
+        color: var(--ink);
+        font: 16px/1.6 Georgia, 'Times New Roman', serif;
+      }
+      header {
+        background: var(--navy-deep);
+        color: var(--warm-white);
+        padding: 2.5rem 1.5rem 2rem;
+      }
+      .wrap { max-width: 1100px; margin: 0 auto; }
+      .kicker {
+        font: 700 0.75rem/1 system-ui, -apple-system, 'Segoe UI', sans-serif;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #9cc3ef;
+        margin: 0 0 0.75rem;
+      }
+      h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 0.75rem; }
+      header p { margin: 0; color: #d9e4f1; max-width: 70ch; }
+      nav { margin-top: 1.25rem; font-family: system-ui, -apple-system, sans-serif; font-size: 0.9rem; }
+      nav a { color: var(--warm-white); margin-right: 1.25rem; }
+      main { padding: 2rem 1.5rem 4rem; }
+      section {
+        background: #fff;
+        border: 1px solid var(--rule);
+        border-radius: 14px;
+        padding: 1.75rem;
+        margin-bottom: 2.25rem;
+        box-shadow: 0 2px 10px rgba(0, 34, 74, 0.06);
+      }
+      .num {
+        display: inline-block;
+        font: 700 0.8rem/1 system-ui, -apple-system, sans-serif;
+        color: #fff;
+        background: var(--navy);
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
+        margin-bottom: 0.6rem;
+      }
+      h2 { color: var(--navy-deep); font-size: 1.6rem; line-height: 1.2; margin: 0 0 1rem; }
+      figure { margin: 0; }
+      figure a { display: block; }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid var(--rule);
+        border-radius: 10px;
+      }
+      figcaption {
+        margin-top: 1rem;
+        padding: 1rem 1.2rem;
+        background: var(--paper);
+        border-left: 4px solid var(--navy);
+        border-radius: 0 8px 8px 0;
+        font-size: 1.05rem;
+      }
+      .meta {
+        margin-top: 0.6rem;
+        font: 0.8rem/1.4 system-ui, -apple-system, sans-serif;
+        color: var(--muted);
+      }
+      code { font-size: 0.9em; background: #eef1f5; padding: 0.05em 0.3em; border-radius: 4px; }
+      header code { background: rgba(255, 255, 255, 0.16); color: #fff; }
+      footer { color: var(--muted); font: 0.85rem/1.5 system-ui, -apple-system, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <p class="kicker">Homework 4 · Problem 11 · App check</p>
+        <h1>Campus Customs live site: tested with the real chatbot</h1>
+        <p>
+          The screenshots were taken on 2026-09-28 at 22:48 EDT from the running site (React + Vite at localhost:5173, FastAPI at port 8000, PydanticAI agent on <code>gpt-5.6-terra</code>). They were captured in Google Chrome as a guest shopper, and every number was checked against <code>data/campus_customs.db</code> at the time of capture.
+        </p>
+        <nav aria-label="Checks">
+          <a href="#inventory">1. Inventory check</a>
+          <a href="#search-results">2. Search-result cards</a>
+          <a href="#usability">3. Usability feature</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="inventory">
+        <span class="num">Check 1</span>
+        <h2>Chat checking the inventory level of an item</h2>
+        <figure>
+          <a href="app_check_images/inventory.png"><img src="app_check_images/inventory.png" alt="Product page for the Basic Hoodie Big Yale with the chat panel open. The shopper asks how many are left in size XL and the price; the assistant replies that size XL has only 2 left and the hoodie is $68, with a product card below." /></a>
+          <figcaption>
+            On the Basic Hoodie Big Yale product page, the shopper asked “How many of these do you have left in size XL, and what's the price?” and the assistant answered “Size XL has only 2 left, and the Basic Hoodie Big Yale is $68.” Both figures match the database at the time of the test (<code>inventory</code> XL = 2, <code>catalogue</code> price = $68.00), and the product card under the reply is built by the server from those same rows, so the chat reports real stock and price rather than guessing.
+            <div class="meta">Also shown: the page context resolving “these” to the product being viewed, and the page's own size tiles agreeing (XL “Only 2 left”).</div>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="search-results">
+        <span class="num">Check 2</span>
+        <h2>Dynamic search-result cards after a category question (hoodies)</h2>
+        <figure>
+          <a href="app_check_images/search_results.png"><img src="app_check_images/search_results.png" alt="Products page titled 'Yale hoodies' with the eyebrow 'From your chat with our assistant', a grid of hoodie cards, and the chat panel saying 'We have 27 Yale hoodies, from $45–$88' with a 'View all 27 on the page' button." /></a>
+          <figcaption>
+            After “What hoodies do you have?” was asked from the Home page, the agent searched the catalogue and returned structured <code>page_results</code>, and the site switched to the Products page and rendered all 27 hoodies as cards with image, name, price and short description (the database has exactly 27 hoodies, priced $45–$88 as the reply says). Clicking the first card the chat placed on the page opened its single-item page (<code>/products/basic-hoodie-big-yale</code>), confirming the Problem 3 detail view still works for chat-generated cards.
+            <div class="meta">API contract: the agent returns <code>{search_id, title}</code>; the server resolves it into <code>{title, total, products[]}</code> from the live database, so the model cannot invent or misprice a card.</div>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="usability">
+        <span class="num">Check 3</span>
+        <h2>Usability feature from Problem 9: filter, sort and search bar (F1)</h2>
+        <figure>
+          <a href="app_check_images/usability_filters.png"><img src="app_check_images/usability_filters.png" alt="All products page showing 'Showing 12 of 102', a search box containing 'hoddie', colour set to Navy, size L, sort Price high to low, the note 'Showing results for hoodie (you typed hoddie)', and navy hoodie cards starting at $88." /></a>
+          <figcaption>
+            The Problem 9 filter bar narrowed 102 products to 12 using a keyword search, the Navy colour filter, “In stock in size L” and “Price: high to low” sorting, all kept in the URL (<code>/products?q=hoddie&amp;size=L&amp;colour=Navy&amp;sort=price-desc</code>) so Back and bookmarks restore the view. The misspelled search “hoddie” was read as “hoodie” by the typo-tolerant search (B2) and flagged on screen, and the count of 12 matches the database's navy hoodies with size L in stock.
+            <div class="meta">Also visible: the Problem 9 stock badges (F3) on each card, e.g. “Sold out in XS”, “Low stock”, “Sold out in XS, XL”.</div>
+          </figcaption>
+        </figure>
+      </section>
+
+      <footer>
+        <p>
+          Screenshots are in <code>app_check_images/</code> (2880×1800, 1440×900 viewport at 2× scale). Click any screenshot to open it full size. Guest sessions were used, so no test conversations were saved to <code>chat_messages</code>.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

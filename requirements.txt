@@ -1,0 +1,9 @@
+# Backend (FastAPI + PydanticAI agent). Install with: python -m pip install -r requirements.txt
+# The slim PydanticAI package with the OpenAI extra (the model is called through Portkey's OpenAI-compatible API).
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+pydantic-ai-slim[openai]==2.51.0
+python-dotenv==1.2.3
+argon2-cffi==25.1.0
+itsdangerous==2.2.0

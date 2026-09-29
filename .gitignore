@@ -1,0 +1,27 @@
+# Secrets: only the placeholder template is committed
+.env
+.env.*
+!.env.example
+
+# Data pack: the database and product images stay local
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Node / Vite
+node_modules/
+frontend/dist/
+*.local
+
+# OS / editor / logs
+.DS_Store
+.vscode/
+.idea/
+*.log
